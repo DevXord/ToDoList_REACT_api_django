@@ -45,6 +45,7 @@ ALLOWED_HOSTS = ['localhost',
                  '127.0.0.1', 
                  local_ip,
                  'todolistreactapidjango-production.up.railway.app',
+        
                  ]
 
 
@@ -65,7 +66,7 @@ INSTALLED_APPS = [
    
 ]
  
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -75,14 +76,15 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware', 
+    'corsheaders.middleware.CorsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware', 
 ]
  
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000", 
     "http://" + local_ip + ":3000",
-    'https://devxord.github.io/ToDoList_REACT/',
-    'http://devxord.github.io/ToDoList_REACT/'
+    'http://devxord.github.io',
+    'https://devxord.github.io'
 ]
 
 CORS_ALLOW_HEADERS = [
