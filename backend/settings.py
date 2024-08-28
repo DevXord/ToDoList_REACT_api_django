@@ -14,10 +14,10 @@ from pathlib import Path
 
 import socket
 import environ 
+import os
 
 env = environ.Env()
-# reading .env file
-environ.Env.read_env()
+ 
 
 
 local_ip = socket.gethostbyname(socket.gethostname())
@@ -25,7 +25,8 @@ local_ip = socket.gethostbyname(socket.gethostname())
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+# reading .env file
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
  
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -39,7 +40,7 @@ DEBUG = True
 ALLOWED_HOSTS = ['localhost', 
                  '127.0.0.1', 
                  local_ip,
-                 'devxord.ct8.pl']
+                 'https://todolistreactapidjango-production.up.railway.app']
 
 
 # Application definition
