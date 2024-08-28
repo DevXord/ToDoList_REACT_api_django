@@ -16,7 +16,7 @@ import socket
 import environ 
 import os
 
-env = environ.Env()
+ 
  
 
 
@@ -25,22 +25,27 @@ local_ip = socket.gethostbyname(socket.gethostname())
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
 # reading .env file
+env = environ.Env()
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
+
+ 
  
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env("SECRET_KEY")
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = ['localhost', 
                  '127.0.0.1', 
                  local_ip,
-                 'https://todolistreactapidjango-production.up.railway.app']
+                 'devxord.github.io',
+                 'devxord.github.io/ToDoList_REACT/']
 
 
 # Application definition
@@ -76,7 +81,8 @@ MIDDLEWARE = [
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000", 
     "http://" + local_ip + ":3000",
-    'https://devxord.ct8.pl'
+    'https://devxord.github.io/ToDoList_REACT/',
+    'http://devxord.github.io/ToDoList_REACT/'
 ]
 
 CORS_ALLOW_HEADERS = [
