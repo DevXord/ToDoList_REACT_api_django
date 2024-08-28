@@ -44,8 +44,8 @@ DEBUG = env('DEBUG')
 ALLOWED_HOSTS = ['localhost', 
                  '127.0.0.1', 
                  local_ip,
-                 'devxord.github.io',
-                 'devxord.github.io/ToDoList_REACT/']
+                 'todolistreactapidjango-production.up.railway.app',
+                 ]
 
 
 # Application definition
