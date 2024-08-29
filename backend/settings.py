@@ -44,7 +44,7 @@ DEBUG = env('DEBUG')
 ALLOWED_HOSTS = ['localhost', 
                  '127.0.0.1', 
                  local_ip,
-                 'todolistreactapidjango-production.up.railway.app',
+                 'web-production-e15a7.up.railway.app',
               
         
 ]
