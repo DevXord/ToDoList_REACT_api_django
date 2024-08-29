@@ -7,9 +7,8 @@ import os
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST, require_GET
-import json
-
-
+from rest_framework.views import APIView
+from rest_framework.permissions import IsAdminUser
 
 class TaskViewSet(viewsets.ViewSet):
     """
@@ -83,5 +82,14 @@ class CreateTaskViewSet(viewsets.ViewSet):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    
+    
+    
  
+class ResetTasksView(APIView):
+    permission_classes = [IsAdminUser]  # Tylko admini mogą korzystać z tej funkcji
 
+    def post(self, request, *args, **kwargs):
+        Task.objects.all().delete()  # Usuwa wszystkie obiekty Task
+        return Response({"detail": "All tasks have been deleted."}, status=200)
