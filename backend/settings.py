@@ -45,8 +45,23 @@ ALLOWED_HOSTS = ['localhost',
                  '127.0.0.1', 
                  local_ip,
                  'todolistreactapidjango-production.up.railway.app',
+              
         
-                 ]
+]
+
+ 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': env('PGDATABASE'),
+        'USER':  env('PGUSER'),
+        'PASSWORD': env('PGPASSWORD'),
+        'HOST': env('PGHOST'),  # lub IP serwera
+        'PORT': env('PGPORT'),       # domyślny port PostgreSQL 
+ }
+}
+
+
 
 
 # Application definition
@@ -84,7 +99,9 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000", 
     "http://" + local_ip + ":3000",
     'http://devxord.github.io',
-    'https://devxord.github.io'
+    'https://devxord.github.io',
+    'https://autorack.proxy.rlwy.net',
+    'http://autorack.proxy.rlwy.net'
 ]
 
 CORS_ALLOW_HEADERS = [
@@ -117,17 +134,7 @@ TEMPLATES = [
  
 
 
-# Database
-# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
-
+ 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
