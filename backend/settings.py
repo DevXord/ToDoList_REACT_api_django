@@ -15,7 +15,7 @@ from pathlib import Path
 import socket
 import environ 
 import os
-
+import dj_database_url
  
  
 
@@ -49,16 +49,12 @@ ALLOWED_HOSTS = ['localhost',
         
 ]
 
+DATABASE_URL = env('DATABASE_URL')
+ 
  
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': env('PGDATABASE'),
-        'USER':  env('PGUSER'),
-        'PASSWORD': env('PGPASSWORD'),
-        'HOST': env('PGHOST'),  # lub IP serwera
-        'PORT': env('PGPORT'),       # domyślny port PostgreSQL 
- }
+    'default':  dj_database_url.config(default=DATABASE_URL,conn_max_age=1800)
+    
 }
 
 
