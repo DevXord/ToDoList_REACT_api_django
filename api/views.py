@@ -2,13 +2,21 @@ from rest_framework import viewsets, status
 from .models import Task
 from .serializers import TaskSerializer
 from rest_framework.decorators import action
-from rest_framework.response import Response 
-import os
-from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
-from django.views.decorators.http import require_POST, require_GET
+from rest_framework.response import Response   
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAdminUser
+import environ 
+import os
+from pathlib import Path
+ 
+ 
+# reading .env file
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+env = environ.Env()
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
+
+
 
 class TaskViewSet(viewsets.ViewSet):
     """
@@ -88,8 +96,14 @@ class CreateTaskViewSet(viewsets.ViewSet):
     
  
 class ResetTasksView(APIView):
-    permission_classes = [IsAdminUser]  # Tylko admini mogą korzystać z tej funkcji
-
+    
+ 
+    
     def post(self, request, *args, **kwargs):
+       
+        if request.headers.get('X-API-Key') != env('DJANGO_API_SECRET_KEY'):
+            return Response({'detail': 'Invalid API Key'}, status=status.HTTP_403_FORBIDDEN)
+        
+        
         Task.objects.all().delete()  # Usuwa wszystkie obiekty Task
         return Response({"detail": "All tasks have been deleted."}, status=200)

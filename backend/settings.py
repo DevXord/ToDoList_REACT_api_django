@@ -17,8 +17,6 @@ import environ
 import os
 import dj_database_url
  
- 
-
 
 local_ip = socket.gethostbyname(socket.gethostname())
  
