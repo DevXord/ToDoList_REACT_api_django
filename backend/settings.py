@@ -97,7 +97,8 @@ CORS_ALLOWED_ORIGINS = [
     'http://devxord.github.io',
     'https://devxord.github.io',
     'https://autorack.proxy.rlwy.net',
-    'http://autorack.proxy.rlwy.net'
+    'http://autorack.proxy.rlwy.net',
+    'http://cronjob-production-53ac.up.railway.app'
 ]
 
 CORS_ALLOW_HEADERS = [
