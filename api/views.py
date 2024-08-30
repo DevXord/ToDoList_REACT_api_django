@@ -100,7 +100,7 @@ class ResetTasksView(APIView):
  
     
     def post(self, request, *args, **kwargs):
-       
+        print("from serwer: " + request.headers.get('X-API-Key') + "from api: " +env('DJANGO_API_SECRET_KEY'))
         if request.headers.get('X-API-Key') != env('DJANGO_API_SECRET_KEY'):
             return Response({'detail': 'Invalid API Key'}, status=status.HTTP_403_FORBIDDEN)
         
